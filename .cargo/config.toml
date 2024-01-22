@@ -1,0 +1,13 @@
+
+
+
+[target.armv5te-unknown-linux-gnueabi]
+linker = "arm-linux-gnueabi-gcc"
+
+[target.armv5te-unknown-linux-musleabi]
+linker = "arm-linux-gnueabi-gcc"
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
