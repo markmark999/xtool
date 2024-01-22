@@ -64,6 +64,7 @@ impl Transport for TcpStream {}
 impl Transport for Box<dyn SerialPort> {}
 
 fn main() -> anyhow::Result<()> {
+    let _ = dotenvy::dotenv();
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::from_default_env())
         .with(tracing_subscriber::fmt::layer())

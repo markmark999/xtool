@@ -9,6 +9,7 @@ edition = "2021"
 anyhow = "1.0.79"
 bytes = "1.5.0"
 clap = { version = "4.4.18", features = ["derive"] }
+dotenvy = "0.15.7"
 serialport = { version = "4.3.0", default-features = false }
 tracing = "0.1.40"
 tracing-appender = "0.2.3"
