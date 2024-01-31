@@ -1,0 +1,45 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'xtool'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=xtool",
+                    "--package=xtool"
+                ],
+                "filter": {
+                    "name": "xtool",
+                    "kind": "bin"
+                }
+            },
+            "args": ["tcp", "--ip", "172.30.240.1",  "--port", "8900", "--send", "01 02 03"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'xtool'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=xtool",
+                    "--package=xtool"
+                ],
+                "filter": {
+                    "name": "xtool",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

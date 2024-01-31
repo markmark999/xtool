@@ -1,12 +1,13 @@
 use std::{
     io::{Read, Write},
     net::{Ipv4Addr, TcpStream},
-    path::PathBuf,
+    // path::PathBuf,
 };
 
 use clap::{Parser, Subcommand};
 use serialport::SerialPort;
 use tracing_subscriber::prelude::*;
+use tracing_subscriber::{fmt, layer::SubscriberExt, util::SubscriberInitExt};
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Cli {
@@ -53,15 +54,13 @@ impl Transport for TcpStream {}
 impl Transport for Box<dyn SerialPort> {}
 
 fn main() -> anyhow::Result<()> {
-    let _ = dotenvy::dotenv();
     tracing_subscriber::registry()
-        .with(tracing_subscriber::EnvFilter::from_default_env())
         .with(tracing_subscriber::fmt::layer())
         .with(
             tracing_subscriber::fmt::layer()
-                .with_writer(tracing_appender::rolling::hourly("log", "xtool.log")),
-        )
-        .init();
+                .with_writer(tracing_appender::rolling::minutely("log", "xtool.log")),
+        ).init();
+        
     let cli = Cli::parse();
 
     let mut args: (Box<dyn Transport>, Option<Vec<u8>>) = match cli.command {
